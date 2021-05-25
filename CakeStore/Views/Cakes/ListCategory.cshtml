@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Cakes>
+
+@{ var pageName = ViewBag.CurrentCategory;
+                ViewData["Title"] = pageName; }
+
+<h2>@pageName</h2>
+<hr />
+
+@foreach (var cake in Model)
+{
+@Html.Partial("CakeSummary", cake)}
+<br />

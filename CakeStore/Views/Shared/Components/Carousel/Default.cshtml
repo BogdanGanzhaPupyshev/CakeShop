@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Cakes>
+
+<div class="row carousel-holder" align="center">
+    <div class="col-md-12">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                @foreach (var cake in Model)
+                {
+    <li data-target="#carousel-example-generic" data-slide-to="@cake.Id"></li>}
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="text-center"><b>Weekly Specials!</b></div>
+                    <img class="slide-image" src="https://bizneszakon.ru/wp-content/uploads/2018/06/konditerskaya.jpg" alt="Home page picture">
+                </div>
+                @foreach (var cake in Model)
+                {
+    <div class="item">
+        <div class="text-center"><b>@cake.Name</b></div>
+        <a asp-controller="Cakes" asp-action="DisplayDetails" asp-route-id="@cake.Id">
+            <img class="slide-image" src="@cake.ImageUrl" alt="Picture of @cake.Name">
+        </a>
+    </div>  }
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="rounded-circle" src="~/images/Ingfructs.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>Best ingredients</h2>
+            <p>We make cakes for you from the freshest and most delicious ingredients from around the world</p>
+
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="rounded-circle" src="~/images/fillin.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>Dough from professionals</h2>
+            <p>
+                We make cake fillings according to our own recipes so that you can also enjoy its taste.
+            </p>
+
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="rounded-circle" src="~/images/lowprice.png" alt="Generic placeholder image" width="140" height="140">
+            <h2> Lowest prices</h2>
+            <p>
+                Our cakes are the best, tastiest and at the best prices because we make them with love for you.
+            </p>
+
+        </div><!-- /.col-lg-4 -->
+    </div>
+</div>

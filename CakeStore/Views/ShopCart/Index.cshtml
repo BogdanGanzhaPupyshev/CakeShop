@@ -1,0 +1,49 @@
+﻿@using CakeStore.Viewcs
+@model ShopCartView
+    
+@{ var pageName = "Shopping Cart";
+    ViewData["Title"] = pageName; }
+
+<h2>Your @pageName</h2>
+<h4>Your shoppingcart</h4>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Selected Amount</th>
+            <th>Cake</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.ShopCart.ShopCartItems)
+        {
+<tr>
+    <td class="text-center"><a class="btn btn-default" asp-action="RemoveFromShopCart" asp-route-cakeId="@line.Cake.Id"><b>-</b></a>          <b>@line.Amount</b>          <a class="btn btn-default" asp-action="AddToShoppingCart" asp-route-cakeId="@line.Cake.Id"><b>+</b></a></td>
+    <td class="text-left">@line.Cake.Name</td>
+    <td class="text-right">@line.Cake.Price.ToString("c")</td>
+    <td class="text-right">
+        @((line.Amount * line.Cake.Price).ToString("c"))
+    </td>
+</tr>
+}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.ShopCartTotal.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div align="right">
+    @if (Model.ShopCartTotal > 0)
+    {
+<a asp-controller="Order" asp-action="Checkout" class="btn btn-primary">Check Out</a>}
+</div>
+<div align="left">
+    <a asp-controller="ShoppingCart" asp-action="ClearCart" class="btn btn-danger">Clear Cart</a>
+</div>
+
